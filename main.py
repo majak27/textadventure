@@ -1,4 +1,4 @@
-#locaties
+#dictionary van locaties
 locatie = {
   "bar" :  {
     "title" : "bar",
@@ -15,11 +15,47 @@ locatie = {
   "kantoor": {
     "title" : "kantoor",
     "description": "Je kan hier iets doen"
+  },
+  "locatie5": {
+    "title": "locatie5",
+    "description": "locatie5"
+  },
+  "locatie6": {
+    "title": "locatie6",
+    "description": "locatie6"
+  },
+  "locatie7": {
+    "title": "locatie7",
+    "description": "locatie7"
+  },
+  "locatie8": {
+    "title": "locatie8",
+    "description": "locatie8"
+  },
+  "locatie9": {
+    "title": "locatie9",
+    "description": "locatie9"
+  },
+  "locatie10": {
+    "title": "locatie5",
+    "description": "locatie10"
   }
 }
 
+#dictionary van objecten
+objecten = {
+  "object1":{
+    "title": "object1",
+    "description":"description"
+  },
+  "object2":{
+    "title": "object2",
+    "description":"description"
+  },
+}
+
 #introductie
-print("Titel van het spel")
+print("Restaurant spel")
 naam = input("Wat is je naam? ")
 print(f"Hallo {naam}, welkom bij het spel!")
 print("Je zit aan de bar met een drankje in een restaurant.")
@@ -31,35 +67,43 @@ print("Je moet de manager helpen!" )
 print( "Wil jij de manager helpen door middel van het voltooien van taken in en rondom het restaurant? (ja/nee)")
 antwoord = input()
 
-if antwoord.lower().strip() == "ja":
-  print("De manager is nu al ontzettend tevreden met jou en je spontane hulp. Hij biedt je zelfs salaris aan als je de taken goed uitvoert.")
-  def game(room):
-    currentlocatie = locatie[room]
-
-    # get this room's title and description
-    title = currentlocatie["title"]
-    description = currentlocatie["description"]
-    
-    # show to user
-    print(f"Je bent hier: {title}")
-    print(description)
-    print("Type de naam van de kamer waar je naartoe wilt gaan:")
-    print(", ".join(locatie.keys()))
-    nextRoom = input()
-
-    #TODO: check and sanitize input
-    if nextRoom.lower().strip() not in ('bar', 'kapstok', 'keuken','kantoor'):
-      print("Sorry, dit is niet een geldige ruimte, probeer opnieuw")
-      nextRoom = input()
-    else:
-    # go to next room
-      game(nextRoom)
+while True:
+  #input control
+  if antwoord.lower().strip() == "ja":
+      print("De manager is nu al ontzettend tevreden met jou en je spontane hulp. Hij biedt je zelfs salaris aan als je de taken goed uitvoert.")
       
-    game(nextRoom)
+      #gameloop
+      def game(room):
+        currentlocatie = locatie[room]
 
-  #start the game from the bar
-  game("bar")
-  
-elif antwoord.lower().strip() == "nee":
-  print("De manager had dit niet verwacht. Hij had je als een behulpzaam persoon ingeschat, maar dit valt hem wat tegen. Je bent niet meer welkom in zijn restaurant. 1 maand later zie je in de krant dat het restaurant failliet is. [game over]")
+        # get this room's title and description
+        title = currentlocatie["title"]
+        description = currentlocatie["description"]
+        
+        # geeft aan waar je bent
+        print(f"Je bent hier: {title}")
+        print(description)
+        print("Type de naam van de kamer waar je naartoe wilt gaan:")
+        #toont alle locaties
+        print(", ".join(locatie.keys()))
+        nextRoom = input()
 
+        #input wordt gecheckt
+        if nextRoom.lower().strip() not in locatie:
+          print("Sorry, dit is niet een geldige ruimte, probeer opnieuw")
+          nextRoom = input()
+        else:
+          game(nextRoom)
+
+        #naar de volgende ruimte gaan
+        game(nextRoom)
+
+      #start de game bij de bar
+      game("bar")
+      
+  elif antwoord.lower().strip() == "nee":
+      antwoord = input("De manager had dit niet verwacht. Hij had je als een behulpzaam persoon ingeschat, maar dit valt hem zeer tegen. Je bent nooit meer welkom in zijn restaurant. Een maand later zie je in de krant dat het restaurant failliet is. [GAME O]").lower().input()
+    
+  else:
+    print(f"{antwoord} is niet een geldige optie, {naam}. Probeer opnieuw")
+    antwoord = input()
