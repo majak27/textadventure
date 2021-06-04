@@ -5,6 +5,7 @@ from tabulate import tabulate
 
 #to do
 # - health systeem?
+print(1)
 
 #INVENTORY LIST
 inventory = []
