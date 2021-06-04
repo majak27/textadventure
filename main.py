@@ -1,7 +1,6 @@
 import time
 import sys 
 import os
-from tabulate import tabulate
 
 #to do
 # - health systeem?
@@ -19,6 +18,7 @@ locatie = 'locatie'
 title = 'title'
 description = 'description'
 item = 'item'
+lijst = 'lijst'
 opties = 'opties'
 dood = 'dood'
 win = 'win'
@@ -32,22 +32,20 @@ locatie = {
   "Bar": {
     title : "Bar",
     description : "Hier kan je een drankje doen, maar om de manager te helpen zal je eerst moeten beginnen met je jas ophangen...",
-    opties : "N: Gang\nO: Keuken\nZ: Ingang\nW: ..",
-    item : 'object',
+    opties : "N: Gang\nO: Keuken\nZ: Ingang",
+    item : ['object'],
     N: "Gang",
     O: "Keuken",
     Z: "Ingang",
-    W: ""
   }, 
   "Gang":{
     title : "Gang",
     description :"Je bent bij een kapstok. Handig, want je hebt nog al je waardevolle spullen in je jaszak zitten. Je hangt je jas op. Je ziet in je ooghoek een sleutel met het woord 'garage' erop staan.",
-    opties : "N: Bar\nO: WC\nZ: Eetgedeelte\nW: ..",
-    item : "",
+    opties : "N: Bar\nO: WC\nZ: Eetgedeelte",
+    item : ["sleutel"],
     N: "Bar",
     O: "WC",
     Z: "Eetgedeelte",
-    W: ""
   },
   "Keuken" : {
     title: "Keuken",
@@ -127,8 +125,6 @@ locatie = {
   },
 }
 
-ding = locatie[player.location][item]
-
 #help
 def help_menu(): 
   os.system("clear")
@@ -167,33 +163,42 @@ def menu_opties():
 def print_location():
   os.system('clear')
   print('=' * 45)
-  print(player.location)
+  print('Je bent hier: ' + player.location)
   print('\n'+locatie[player.location][description])
-  if ding not in inventory:
-    print(locatie[player.location][item])
+  print('\n' + str(locatie[player.location][item]))
   print('\nJe kunt hier naartoe gaan:')
   print(locatie[player.location][opties])
   print('=' * 45)
 
-#item oppakken (!je kan hierna nog niet naar een andere kamer)
+#item oppakken 
+#! hele list wordt geplaatst in inventory, veranderen naar alleen variabele!! 
 def pick_up_item():
-  print(f'{ding} zit nu in je inventory!')
-  inventory.append(ding)
-  del locatie[player.location][item]
+  print('Welk item wil je oppakken?')
+  print('Kies uit:' + str(locatie[player.location][item]))
+  antwoord = input ('--> ')
+  if antwoord.lower() in locatie[player.location][item]:
+    inventory.append(antwoord)
+    print(f'{antwoord} zit nu in je inventory!')
+    del locatie[player.location][item]
+  else:
+    print('Dit is niet een geldig antwoord. Probeer opnieuw.')
+    pick_up_item()
   time.sleep(1)
   game_loop()
 
 #item droppen
-#nog doen: toevoegen aan item van de ruimte zelf
 def drop_item(): 
-  print(list(inventory))
-  print('Welk item wil je droppen?')
-  antwoord = input('--> ')
-  inventory.remove(antwoord)
-  locatie[player.location][item].append(antwoord)
-  print(f'{antwoord} is nu gedropt.')
-  time.sleep(1)
-  game_loop()
+    print(inventory)
+    print('Welk item wil je droppen?')
+    antwoord = input('--> ')
+    if antwoord in inventory:
+        inventory.remove(antwoord)
+        locatie[player.location][item].append(antwoord)
+        print(f'{antwoord} is nu gedropt.')
+        time.sleep(1)
+    else:
+        print(f'Je hebt {antwoord} niet in je inventory!')
+    game_loop()
   
 #naar andere ruimtes gaan
 def move_speler(move_actie):
@@ -220,33 +225,22 @@ def game_over():
 
 #SCHERM1
 print('=' * 45)
-scherm1 = 'Welkom bij het Restaurant Drama!\nDruk op enter om verder te gaan\n'
-for char in scherm1:
-  sys.stdout.write(char)
-  sys.stdout.flush()
-  time.sleep(0.04)
+print('Welkom bij het Restaurant Drama!\nDruk op enter om verder te gaan')
 antwoord = input()
 os.system('clear')
 
 #SCHERM2
 print('=' * 45)
-scherm2 = 'Wat is je naam?\n'
-for char in scherm2:
-  sys.stdout.write(char)
-  sys.stdout.flush()
-  time.sleep(0.04)
+print('Wat is je naam?')
 naam = input('--> ')
 os.system("clear")
 
 #SCHERM3
 print('=' * 45)
-scherm3 = f"Hallo {naam}, welkom bij het spel!\n"
-for char in scherm3:
-  sys.stdout.write(char)
-  sys.stdout.flush()
-  time.sleep(0.04)
-table = [["Gedurende het spel kun je de volgende letters intoetsen:\ni: inventory (deze is nu nog leeg!) \nh: help (voor als je het even niet meer weet)\ng: get (om een item op te pakken)\nn,o,z,w: om naar verschillende ruimtes te gaan"]]
-print(tabulate(table, tablefmt='grid'))
+print(f"Hallo {naam}, welkom bij het spel!")
+print('-' * 45)
+print ('Gedurende het spel kun je de volgende letters intoetsen:\ni: inventory (deze is nu nog leeg!) \nh: help (voor als je het even niet meer weet)\ng: get (om een item op te pakken)\nn,o,z,w: om naar verschillende ruimtes te gaan')
+print('-' * 45)
 print("Druk op enter om verder te gaan. ")
 print('=' * 45)
 iets = input()
@@ -254,7 +248,7 @@ os.system("clear")
 
 #SCHERM4
 print('=' * 45)
-print(f"Je zit aan de bar met een drankje in een restaurant.\nHet is er druk. Je ziet mensen drinken, praten en het gezellig hebben. Je voelt je alleen. Je wil je drankje afrekenen en begint te zoeken naar je portemonnee, maar hij is weg.\nNog voordat je iets kan zeggen zegt een mannenstem:\n‘Ik betaal het drankje voor beste {naam} hier!\nHet is de manager. Hij heeft hulp nodig voor klusjes in en rondom het restaurant. Het restaurant heeft namelijk door de coronacrisis een tekort aan personeel met slechtere opbrengsten als gevolg. Het mag niet failliet gaan, want dit is jouw lievelings restaurant.\nJe moet de manager helpen!\n")
+print(f"Je zit aan de bar met een drankje in een restaurant.\nHet is er druk. Je ziet mensen drinken, praten en het gezellig hebben. Je voelt je alleen. Je wil je drankje afrekenen en begint te zoeken naar je portemonnee, maar hij is weg.\nNog voordat je iets kan zeggen zegt een mannenstem:\n‘Ik betaal het drankje voor beste {naam} hier!\nHet is de manager. Hij heeft hulp nodig voor klusjes in en rondom het restaurant. Het restaurant heeft namelijk door de coronacrisis een tekort aan personeel met slechtere opbrengsten als gevolg. Het mag niet failliet gaan, want dit is jouw lievelings restaurant.\n\nJe moet de manager helpen!")
 print('=' * 45)
 print("Druk op enter om de manager te helpen met zijn taken")
 antwoord = input()
@@ -288,6 +282,7 @@ def game_loop():
     move_speler(move_actie)
   else:
     print('Sorry, dit is niet een geldige ruimte, probeer opnieuw')
+    time.sleep(2)
     game_loop()
 
 game_loop()
