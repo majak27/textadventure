@@ -5,7 +5,6 @@ from tabulate import tabulate
 
 #to do
 # - health systeem?
-print(1)
 
 #INVENTORY LIST
 inventory = []
@@ -34,7 +33,7 @@ locatie = {
     title : "Bar",
     description : "Hier kan je een drankje doen, maar om de manager te helpen zal je eerst moeten beginnen met je jas ophangen...",
     opties : "N: Gang\nO: Keuken\nZ: Ingang\nW: ..",
-    item : ['object'],
+    item : 'object',
     N: "Gang",
     O: "Keuken",
     Z: "Ingang",
@@ -164,14 +163,14 @@ def menu_opties():
     print("Sorry, dit is niet een geldige antwoord, probeer opnieuw.")
     menu_opties()
 
-print(2)
-
 #toont je locatie
 def print_location():
   os.system('clear')
   print('=' * 45)
   print(player.location)
   print('\n'+locatie[player.location][description])
+  if ding not in inventory:
+    print(locatie[player.location][item])
   print('\nJe kunt hier naartoe gaan:')
   print(locatie[player.location][opties])
   print('=' * 45)
@@ -187,13 +186,12 @@ def pick_up_item():
 #item droppen
 #nog doen: toevoegen aan item van de ruimte zelf
 def drop_item(): 
-  print(list(enumerate(inventory)))
+  print(list(inventory))
   print('Welk item wil je droppen?')
-  antwoord = int(input('--> '))
-  voorwerp = inventory[antwoord]
-  inventory.remove(voorwerp)
-  locatie[player.location][item].append(voorwerp)
-  print(f'{voorwerp} is nu gedropt.')
+  antwoord = input('--> ')
+  inventory.remove(antwoord)
+  locatie[player.location][item].append(antwoord)
+  print(f'{antwoord} is nu gedropt.')
   time.sleep(1)
   game_loop()
   
@@ -256,11 +254,7 @@ os.system("clear")
 
 #SCHERM4
 print('=' * 45)
-scherm4 = f"Je zit aan de bar met een drankje in een restaurant.\nHet is er druk. Je ziet mensen drinken, praten en het gezellig hebben. Je voelt je alleen. Je wil je drankje afrekenen en begint te zoeken naar je portemonnee, maar hij is weg.\nNog voordat je iets kan zeggen zegt een mannenstem:\n‘Ik betaal het drankje voor beste {naam} hier!\nHet is de manager. Hij heeft hulp nodig voor klusjes in en rondom het restaurant. Het restaurant heeft namelijk door de coronacrisis een tekort aan personeel met slechtere opbrengsten als gevolg. Het mag niet failliet gaan, want dit is jouw lievelings restaurant.\nJe moet de manager helpen!\n"
-for char in scherm4:
-  sys.stdout.write(char)
-  sys.stdout.flush()
-  time.sleep(0.02)
+print(f"Je zit aan de bar met een drankje in een restaurant.\nHet is er druk. Je ziet mensen drinken, praten en het gezellig hebben. Je voelt je alleen. Je wil je drankje afrekenen en begint te zoeken naar je portemonnee, maar hij is weg.\nNog voordat je iets kan zeggen zegt een mannenstem:\n‘Ik betaal het drankje voor beste {naam} hier!\nHet is de manager. Hij heeft hulp nodig voor klusjes in en rondom het restaurant. Het restaurant heeft namelijk door de coronacrisis een tekort aan personeel met slechtere opbrengsten als gevolg. Het mag niet failliet gaan, want dit is jouw lievelings restaurant.\nJe moet de manager helpen!\n")
 print('=' * 45)
 print("Druk op enter om de manager te helpen met zijn taken")
 antwoord = input()
