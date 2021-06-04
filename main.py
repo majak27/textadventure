@@ -163,6 +163,8 @@ def menu_opties():
     print("Sorry, dit is niet een geldige antwoord, probeer opnieuw.")
     menu_opties()
 
+print(2)
+
 #toont je locatie
 def print_location():
   os.system('clear')
