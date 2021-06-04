@@ -4,12 +4,10 @@ import os
 from tabulate import tabulate
 
 #to do
-# - na item oppakken weer kamer kunnen kiezen
-# - typewriter effect
 # - health systeem?
 
 #INVENTORY LIST
-inventory = ['hoi','idk','iets']
+inventory = []
 
 class player:
     def __init__(self):
@@ -35,7 +33,7 @@ locatie = {
     title : "Bar",
     description : "Hier kan je een drankje doen, maar om de manager te helpen zal je eerst moeten beginnen met je jas ophangen...",
     opties : "N: Gang\nO: Keuken\nZ: Ingang\nW: ..",
-    item : "object",
+    item : ['object'],
     N: "Gang",
     O: "Keuken",
     Z: "Ingang",
@@ -43,7 +41,7 @@ locatie = {
   }, 
   "Gang":{
     title : "Gang",
-    description :"Je bent bij een kapstok. Handig, want je hebt nog al je waardevolle spullen in je jaszakken zitten. Je hangt je jas op. Nu kan je aan het werk.",
+    description :"Je bent bij een kapstok. Handig, want je hebt nog al je waardevolle spullen in je jaszak zitten. Je hangt je jas op. Je ziet in je ooghoek een sleutel met het woord 'garage' erop staan.",
     opties : "N: Bar\nO: WC\nZ: Eetgedeelte\nW: ..",
     item : "",
     N: "Bar",
@@ -63,7 +61,7 @@ locatie = {
   },
   "Bijkeuken": {
     title : "Bijkeuken",
-    description : "Je kan hier iets doen",
+    description : "",
     opties : "N: Bar \nO: Keuken\nZ: .. \n W: ..",
     item : "",
     N: "Bar",
@@ -171,8 +169,6 @@ def print_location():
   print('=' * 45)
   print(player.location)
   print('\n'+locatie[player.location][description])
-  if ding not in inventory:
-    print("\nHier ligt: " + locatie[player.location][item])
   print('\nJe kunt hier naartoe gaan:')
   print(locatie[player.location][opties])
   print('=' * 45)
@@ -181,9 +177,8 @@ def print_location():
 def pick_up_item():
   print(f'{ding} zit nu in je inventory!')
   inventory.append(ding)
-  # verwijderen uit locatie
   del locatie[player.location][item]
-  time.sleep(2)
+  time.sleep(1)
   game_loop()
 
 #item droppen
@@ -194,9 +189,9 @@ def drop_item():
   antwoord = int(input('--> '))
   voorwerp = inventory[antwoord]
   inventory.remove(voorwerp)
-  #droppen in locatie
+  locatie[player.location][item].append(voorwerp)
   print(f'{voorwerp} is nu gedropt.')
-  time.sleep(2)
+  time.sleep(1)
   game_loop()
   
 #naar andere ruimtes gaan
@@ -224,20 +219,31 @@ def game_over():
 
 #SCHERM1
 print('=' * 45)
-print('Welkom bij het Restaurant Drama!')
-print('Druk op enter om verder te gaan')
+scherm1 = 'Welkom bij het Restaurant Drama!\nDruk op enter om verder te gaan\n'
+for char in scherm1:
+  sys.stdout.write(char)
+  sys.stdout.flush()
+  time.sleep(0.04)
 antwoord = input()
 os.system('clear')
 
 #SCHERM2
 print('=' * 45)
-print('Wat is je naam?')
+scherm2 = 'Wat is je naam?\n'
+for char in scherm2:
+  sys.stdout.write(char)
+  sys.stdout.flush()
+  time.sleep(0.04)
 naam = input('--> ')
 os.system("clear")
 
 #SCHERM3
 print('=' * 45)
-print(f"Hallo {naam}, welkom bij het spel!")
+scherm3 = f"Hallo {naam}, welkom bij het spel!\n"
+for char in scherm3:
+  sys.stdout.write(char)
+  sys.stdout.flush()
+  time.sleep(0.04)
 table = [["Gedurende het spel kun je de volgende letters intoetsen:\ni: inventory (deze is nu nog leeg!) \nh: help (voor als je het even niet meer weet)\ng: get (om een item op te pakken)\nn,o,z,w: om naar verschillende ruimtes te gaan"]]
 print(tabulate(table, tablefmt='grid'))
 print("Druk op enter om verder te gaan. ")
@@ -247,7 +253,11 @@ os.system("clear")
 
 #SCHERM4
 print('=' * 45)
-print(f"Je zit aan de bar met een drankje in een restaurant.\nHet is er druk. Je ziet mensen drinken, praten en het gezellig hebben. Je voelt je alleen. Je wil je drankje afrekenen en begint te zoeken naar je portemonnee, maar hij is weg.\nNog voordat je iets kan zeggen zegt een mannenstem:\n‘Ik betaal het drankje voor beste {naam} hier!\nHet is de manager. Hij heeft hulp nodig voor klusjes in en rondom het restaurant. Het restaurant heeft namelijk door de coronacrisis een tekort aan personeel met slechtere opbrengsten als gevolg. Het mag niet failliet gaan, want dit is jouw lievelings restaurant.\nJe moet de manager helpen!")
+scherm4 = f"Je zit aan de bar met een drankje in een restaurant.\nHet is er druk. Je ziet mensen drinken, praten en het gezellig hebben. Je voelt je alleen. Je wil je drankje afrekenen en begint te zoeken naar je portemonnee, maar hij is weg.\nNog voordat je iets kan zeggen zegt een mannenstem:\n‘Ik betaal het drankje voor beste {naam} hier!\nHet is de manager. Hij heeft hulp nodig voor klusjes in en rondom het restaurant. Het restaurant heeft namelijk door de coronacrisis een tekort aan personeel met slechtere opbrengsten als gevolg. Het mag niet failliet gaan, want dit is jouw lievelings restaurant.\nJe moet de manager helpen!\n"
+for char in scherm4:
+  sys.stdout.write(char)
+  sys.stdout.flush()
+  time.sleep(0.02)
 print('=' * 45)
 print("Druk op enter om de manager te helpen met zijn taken")
 antwoord = input()
