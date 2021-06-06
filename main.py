@@ -6,7 +6,7 @@ import os
 # - health systeem?
 
 #INVENTORY LIST
-inventory = []
+inventory = ['je jas']
 
 class player:
     def __init__(self):
@@ -33,97 +33,102 @@ locatie = {
     title : "Bar",
     description : "Hier kan je een drankje doen, maar om de manager te helpen zal je eerst moeten beginnen met je jas ophangen...",
     opties : "N: Gang\nO: Keuken\nZ: Ingang",
-    item : ['object'],
+    item : ['je jas'],
     N: "Gang",
-    O: "Keuken",
+    O: "Keuken (1)",
     Z: "Ingang",
   }, 
   "Gang":{
     title : "Gang",
-    description :"Je bent bij een kapstok. Handig, want je hebt nog al je waardevolle spullen in je jaszak zitten. Je hangt je jas op. Je ziet in je ooghoek een sleutel met het woord 'garage' erop staan.",
-    opties : "N: Bar\nO: WC\nZ: Eetgedeelte",
+    description :"Je bent bij een kapstok. Handig, want je hebt nog al je waardevolle spullen in je jaszak zitten. Je hangt je jas op. Je ziet in je ooghoek een sleutel met het woord 'garage' erop staan. \nZo nu kan je aan het werk!",
+    opties : "N: Keuken\nO: WC\nZ: Eetgedeelte",
     item : ["sleutel"],
-    N: "Bar",
+    N: "Keuken",
     O: "WC",
     Z: "Eetgedeelte",
   },
-  "Keuken" : {
+  "Keuken (1)" : {
     title: "Keuken",
-    description : "Wat goed dat je er bent. We waren al aan het wachten op onze redder in nood.",
-    opties : "N: Bar\nO: Opslag\nZ: Bijkeuken\nW:...",
-    item : "Glas",
+    description : "Wat goed dat je er bent. We waren al aan het wachten op onze redder in nood. Je begint met het maken van champignonsoep, maar er is geen champignon meer in de voorraadkast van de keuken. Misschien ligt er ergens anders in het restaurant nog een voorraad aan voedsel?",
+    opties : "N: Bar\nO: Opslag\nZ: Bijkeuken",
+    item : "",
     N: "Bar",
     O: "Opslag",
     Z: "Bijkeuken",
-    W: ""
+  },
+  "Keuken (2)": {
+    title: "Keuken",
+    description : "Ah, fijn! Je hebt de champignons gevonden. Je snijdt ze snel in stukjes en doet ze in de pan en begint de soep te roeren. Na een paar minuten flink geroert te hebben, giet je de soep voorzichtig op de borden. De soep kan worden geserveerd.",
+    opties : "N: Eetgedeelte\nO: Bar \nZ: Bijkeuken ",
+    item: "",
+    N: "Eetgedeelte",
+    O: "Bar",
+    Z: "Bijkeuken",
   },
   "Bijkeuken": {
     title : "Bijkeuken",
-    description : "",
-    opties : "N: Bar \nO: Keuken\nZ: .. \n W: ..",
+    description : "Hier kan je even snel de klusjes doen die voor het koken in de keuken gedaan moeten worden zoals: afwassen, wasmachine uitruimen, keuken schoonmaken etc.",
+    opties : "N: Bar \nO: Keuken",
     item : "",
     N: "Bar",
     O: "Keuken",
-    Z: "",
-    W: ""
   },
   "Opslag": {
     title: "Opslag",
-    description: "locatie5",
-    opties : "A: Bar\nO: Eetgedeelte \nZ: Keuken\nW:...",
+    description: "Hier is al het voorraad aan eten opgeslagen. Je kan hier het benodigde voedsel uit pakken. Ga terug naar de Keuken. ",
+    opties : "A: Bar\nO: Eetgedeelte \nZ: Keuken",
     item : "",
     N: "Bar",
     O: "Eetgedeelte",
-    Z: "Keuken",
-    W: ""
+    Z: "Keuken (2)",
   },
   "WC": {
     title : "WC",
-    description: "description",
+    description: "Nou, je moet wel echt nodig... Even rustig op de wc met een boekje... Even je socials checken... Oeps, je bent de tijd vergeten... [game over]",
     opties : "N: Bar\nO: Gang",
     item : "",
     N: "Gang",
     O: "Keuken",
     Z: "Ingang",
-    W: ""
   },
   "Ingang": {
     title: "Ingang",
     description: "Je bent nu buiten het restaurant. \nHier is geen kraan of iets om je water te vullen. \nNou ja, je stapt in je auto en rijdt van het restaurant weg...",
     opties : "N: Buitenterras \nO: Garage",
+    item: "",
     N: "Buitenterras",
     O: "Garage",
-    Z: "",
-    W: ""
   },
   "Eetgedeelte": {
     title: "Eetgedeelte",
-    description: "locatie8",
-    opties : "N: Bar \nO: Ingang",
+    description: "Oké, je hebt nog geen opdracht gekregen om ober te gaan spelen. Maar hè, hoe lastig kan het zijn? Beetje bestellingen opnemen, naar klanten lachen... Je loopt naar de eerste de beste tafel en je neemt de bestellingen op.",
+    opties : "N: Bar \nO: Keuken \nZ: Ingang", 
+    item: "",
     N: "Gang",
     O: "Keuken",
     Z: "Ingang",
-    W: ""
   },
   "Buitenterras": {
     title: "Buitenterras",
-    description: "locatie9",
+    description: "Heb je de parasols? Zo ja? Goed bezig! Nu moet je ze uitklappen en opzetten en dan ben je klaar voor vandaag.",
     opties : "N: Ingang \nO: Garage",
+    item: "",
     N: "Ingang",
     O: "Garage",
-    Z: "",
-    W: ""
   },
   "Garage": {
     title: "Garage",
-    description: "locatie10",
+    description: "Heb je de garagesleutel? Zo ja, dan kan je in de berging van de garage met de garagesleutel. Nu kan je bij de parasols voor het buitenterras.",
     opties : "N: Buitenterras \nO: Ingang",
+    item: "",
     N: "Buitenterras",
     O: "Ingang",
-    Z: "",
-    W: ""
   },
 }
+
+if True:
+  if locatie[player.location] == "keuken":
+    print('hoi')
 
 #help
 def help_menu(): 
