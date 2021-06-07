@@ -2,9 +2,6 @@ import time
 import sys 
 import os
 
-#to do
-# - health systeem?
-
 #INVENTORY LIST
 inventory = ['je jas']
 
@@ -126,8 +123,7 @@ locatie = {
     opties: [],
     item: "",
     N: "Garage",
-    Z: "Ingang (3)",
-
+    Z: "Ingang",
   },
   "Garage": {
     title: "Garage",
@@ -136,15 +132,45 @@ locatie = {
     description3:"",
     opties : "N: Buitenterras \nO: Ingang",
     item: [],
-    N: "Buitenterras (2)",
-    O: "Ingang (2)",
+    N: "Buitenterras",
+    O: "Ingang",
   },
 }
 
-bezochteKamers = []
-bezochteKamers2 = []
+#SCHERM1
+print('=' * 45)
+print('Welkom bij het Restaurant Drama!\nDruk op enter om verder te gaan')
+antwoord = input()
+os.system('clear')
+
+#SCHERM2
+print('=' * 45)
+print('Wat is je naam?')
+player.name = input('--> ')
+os.system("clear")
+
+#SCHERM3
+print('=' * 45)
+print(f"Hallo {player.name}, welkom bij het spel!")
+print('-' * 45)
+print ('Gedurende het spel kun je de volgende letters intoetsen:\ni: inventory (deze is nu nog leeg!) \nh: help (voor als je het even niet meer weet)\ng: get (om een item op te pakken)\nn,o,z,w: om naar verschillende ruimtes te gaan')
+print('-' * 45)
+print("Druk op enter om verder te gaan. ")
+print('=' * 45)
+iets = input()
+os.system("clear")
+
+#SCHERM4
+print('=' * 45)
+print(f"Je zit aan de bar met een drankje in een restaurant.\nHet is er druk. Je ziet mensen drinken, praten en het gezellig hebben. Je voelt je alleen. Je wil je drankje afrekenen en begint te zoeken naar je portemonnee, maar hij is weg.\nNog voordat je iets kan zeggen zegt een mannenstem:\n‘Ik betaal het drankje voor beste {player.name} hier!\nHet is de manager. Hij heeft hulp nodig voor klusjes in en rondom het restaurant. Het restaurant heeft namelijk door de coronacrisis een tekort aan personeel met slechtere opbrengsten als gevolg. Het mag niet failliet gaan, want dit is jouw lievelings restaurant.\n\nJe moet de manager helpen!")
+print('=' * 45)
+print("Druk op enter om de manager te helpen met zijn taken")
+antwoord = input()
+os.system('clear')
 
 while True:
+  bezochteKamers = []
+  bezochteKamers2 = []
   #help
   def help_menu(): 
     os.system("clear")
@@ -170,6 +196,10 @@ while True:
 
   #terug kunnen gaan bij menu's
   def menu_opties():
+    if locatie[player.location] in bezochteKamers:
+      bezochteKamers.remove(locatie[player.location])
+    elif locatie[player.location] in bezochteKamers2:
+      bezochteKamers2.remove(locatie[player.location])
     antwoord = input('--> ')
     if antwoord.lower() == "j":
       game_over()
@@ -192,17 +222,12 @@ while True:
     else:
       print('\n'+locatie[player.location][description])
       bezochteKamers.append(locatie[player.location])
-    print(item)
     if locatie[player.location][item] != 0:
-      print('\n' + str(locatie[player.location][item]))
-      print('\nJe kunt hier naartoe gaan:')
-      print(locatie[player.location][opties])
-      print('=' * 45)
-    else:
-      print('\nJe kunt hier naartoe gaan:')
-      print(locatie[player.location][opties])
-      print('Kies uit: n, o, z, w, g(get), d(drop), i(inventory), of h(help).')
-      print('=' * 45)
+      print('\nHier ligt: ' + str(locatie[player.location][item]))
+    print('\nJe kunt hier naartoe gaan:')
+    print(locatie[player.location][opties])
+    print('\nKies uit: n, o, z, w, g(get), d(drop), i(inventory), of h(help).')
+    print('=' * 45)
 
 
   #item oppakken 
@@ -214,11 +239,12 @@ while True:
       inventory.append(antwoord)
       print(f'{antwoord} zit nu in je inventory!')
       locatie[player.location][item].remove(antwoord)
+      time.sleep(1)
+      options()
     else:
       print('Dit is niet een geldig antwoord. Probeer opnieuw.')
+      time.sleep(1)
       pick_up_item()
-    time.sleep(1)
-    game_loop()
 
   #item droppen
   def drop_item(): 
@@ -257,40 +283,12 @@ while True:
     time.sleep(4)
     sys.exit()
 
-  #SCHERM1
-  print('=' * 45)
-  print('Welkom bij het Restaurant Drama!\nDruk op enter om verder te gaan')
-  antwoord = input()
-  os.system('clear')
-
-  #SCHERM2
-  print('=' * 45)
-  print('Wat is je naam?')
-  naam = input('--> ')
-  os.system("clear")
-
-  #SCHERM3
-  print('=' * 45)
-  print(f"Hallo {naam}, welkom bij het spel!")
-  print('-' * 45)
-  print ('Gedurende het spel kun je de volgende letters intoetsen:\ni: inventory (deze is nu nog leeg!) \nh: help (voor als je het even niet meer weet)\ng: get (om een item op te pakken)\nn,o,z,w: om naar verschillende ruimtes te gaan')
-  print('-' * 45)
-  print("Druk op enter om verder te gaan. ")
-  print('=' * 45)
-  iets = input()
-  os.system("clear")
-
-  #SCHERM4
-  print('=' * 45)
-  print(f"Je zit aan de bar met een drankje in een restaurant.\nHet is er druk. Je ziet mensen drinken, praten en het gezellig hebben. Je voelt je alleen. Je wil je drankje afrekenen en begint te zoeken naar je portemonnee, maar hij is weg.\nNog voordat je iets kan zeggen zegt een mannenstem:\n‘Ik betaal het drankje voor beste {naam} hier!\nHet is de manager. Hij heeft hulp nodig voor klusjes in en rondom het restaurant. Het restaurant heeft namelijk door de coronacrisis een tekort aan personeel met slechtere opbrengsten als gevolg. Het mag niet failliet gaan, want dit is jouw lievelings restaurant.\n\nJe moet de manager helpen!")
-  print('=' * 45)
-  print("Druk op enter om de manager te helpen met zijn taken")
-  antwoord = input()
-  os.system('clear')
-
   #GAMELOOP
   def game_loop():
     print_location()
+    options()
+
+  def options():
     nextRoom = input('--> ')
     if nextRoom.lower() == "h":
       help_menu()
@@ -315,10 +313,8 @@ while True:
       move_actie = locatie[player.location][W]
       move_speler(move_actie)
     else:
-      print('Sorry, dit is niet een geldige ruimte, probeer opnieuw')
-      time.sleep(2)
-      game_loop()
-
+      print('Sorry, dit is niet een geldige optie, probeer opnieuw')
+      options()
   game_loop()
 
 
