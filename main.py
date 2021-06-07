@@ -11,7 +11,7 @@ inventory = ['je jas']
 class player:
     def __init__(self):
         self.name = ''
-        self.location = 'Bar'
+        self.location = 'Bar (1)'
 player = player()
 
 locatie = 'locatie'
@@ -33,7 +33,7 @@ locatie = {
     title : "Bar",
     description : "Hier kan je een drankje doen, maar om de manager te helpen zal je eerst moeten beginnen met je jas ophangen...",
     opties : "N: Gang\nO: Keuken\nZ: Ingang",
-    item : ['je jas'],
+    item : ['object'],
     N: "Gang",
     O: "Keuken (1)",
     Z: "Ingang (1)",
@@ -42,7 +42,7 @@ locatie = {
     title : "Bar",
     description : "Je krijgt snel een obersschort toegeworpen en richting de eerste de beste tafel toegestuurd om de bestellingen op te nemen. Maar door alle stress over de soep vergeet je helemaal de bestellingen. Het restaurant krijgt slechte reviews: 'Slechte obers, bestelling verkeerd opgenomen'. [game over]",
     opties : "",
-    item : "",
+    item : [],
     N: "",
     O: "",
     Z: ""
@@ -51,7 +51,7 @@ locatie = {
     title : "Bar",
     description : "Ahhh, eindelijk even relaxen na al dat harde werken voor maar 1 gerecht. Je hebt het werken in een restaurant onderschat. Je vraagt de barman om een biertje. Je vergeet even helemaal dat je nog in je werktijd zit. Even later geeft de manger je je laatste taak voor vandaag: parasols uitklappen op het buitenterras (hint: de parasols liggen in de garage).",
     opties : "",
-    item : "",
+    item : [],
     N: "Buitenterras ",
     O: "Garage",
     Z: "WC (2)"
@@ -69,7 +69,7 @@ locatie = {
     title: "Keuken",
     description : "Je hebt je jas nog niet opgehangen? Je denkt toch niet met jas aan te kunnen werken? Hang je jas gewoon op joh!",
     opties: "N: Bar\nO: Gang\nZ: Ingang",
-    item : ["je jas"],
+    item : [],
     N: "Bar (1)",
     O: "Gang",
     Z: "Ingang (1)",
@@ -78,7 +78,7 @@ locatie = {
     title : "Keuken",
     description: "Wat goed dat je er bent. We waren al aan het wachten op onze redder in nood. Je begint met het maken van champignonsoep, maar er is geen champignon meer in de voorraadkast van de keuken. Misschien ligt er ergens anders in het restaurant nog een voorraad aan voedsel?",
     opties : "N: Bar\nO: Opslag\nZ: Bijkeuken",
-    item: "",
+    item: [],
     N: "Bar (2)",
     O: "Opslag",
     Z: "Bijkeuken"
@@ -87,7 +87,7 @@ locatie = {
     title: "Keuken",
     description : "Ah, fijn! Je hebt de champignons gevonden. Je snijdt ze snel in stukjes en doet ze in de pan en begint de soep te roeren. Na een paar minuten flink geroert te hebben, giet je de soep voorzichtig op de borden. De soep wordt meteen geserveerd en valt gelukkig goed in de smaak. Er moet nu alleen nog worden afgewassen.",
     opties : "N: Eetgedeelte\nO: Bar \nZ: Bijkeuken ",
-    item: "",
+    item: [],
     N: "Eetgedeelte (2)",
     O: "Bar (3)",
     Z: "Bijkeuken",
@@ -96,7 +96,7 @@ locatie = {
     title : "Bijkeuken",
     description : "Je bent bezig met afwassen. Wanneer je alle borden grondig hebt afgewassen komt de manager blij naar je toe met 1 laatste taak voor jou vandaag. Je moet parasols op het buitenterras neerzetten (een tip: de parasols vindt je in de garage).",
     opties : "N: Bar \nO: Keuken\nZ: Garage",
-    item : "",
+    item : [],
     N: "Bar",
     O: "Keuken",
     Z: "Garage"
@@ -105,7 +105,7 @@ locatie = {
     title: "Opslag",
     description: "Hier is al het voorraad aan eten opgeslagen. Je kan hier het benodigde eten of drinken halen. Je hebt je champignons gevonden. Nu kan je verdergaan met je soep.",
     opties : "A: Bar\nO: Eetgedeelte \nZ: Keuken",
-    item : "",
+    item : [],
     N: "Bar (2)",
     O: "Eetgedeelte (1)",
     Z: "Keuken (3)",
@@ -114,7 +114,7 @@ locatie = {
     title : "WC",
     description: "Nou, je moet wel echt nodig... Even rustig op de wc met een boekje... Even je socials checken... Oeps, je bent de tijd vergeten... [game over]",
     opties : "",
-    item : "",
+    item : [],
     N: "",
     O: "",
     Z: ""
@@ -123,7 +123,7 @@ locatie = {
     title: "Ingang",
     description: "Je bent nu buiten het restaurant. \nHier is geen kraan of iets om je water te vullen. \nNou ja, je stapt in je auto en rijdt van het restaurant weg... [game over]",
     opties : "",
-    item: "",
+    item: [],
     N: "",
     O: ""
   },
@@ -131,14 +131,14 @@ locatie = {
     title: "Ingang",
     description: "Ik neem aan dat je parasols niet voor hier binnen wil gebruiken? Ze zijn toch echt voor buiten bedoeld.",
     opties : "N: Buitenterras \nO: Garage",
-    item: "",
+    item: [],
     N: "Buitenterras",
     O: "Garage (2)",
   },
   "Ingang (3)": {
     title: "Ingang",
     description: "Je weet niet waar de garage is... Nou oké, whatever... Hier 5 euro als dank voor het doen van maar 1 klusje... Je hoeft hietr gelijk niet meer te werken. [game over]",
-    opties : "",
+    opties : [] ,
     item: "",
     N: "",
     O: "",
@@ -147,7 +147,7 @@ locatie = {
     title: "Eetgedeelte",
     description: "Oké, je hebt nog niet instructies gekregen, maar zo te zien zijn er obers nodig. Hoe moeilijk kan het nou zijn om mensen hun bestellingen op te nemen?",
     opties : "N: Bar \nO: Keuken \nZ: Ingang", 
-    item: "",
+    item: [] ,
     N: "Gang",
     O: "Keuken",
     Z: "Ingang",
@@ -156,7 +156,7 @@ locatie = {
     title: "Eetgedeelte",
     description: "De soep is klaar en iemand moet het serveren... Er is zo te zien een tekort aan obers. Maar hoe moeilijk kan het zijn? Je loopt rechtstreeks naar de tafel die de soep heeft bestelt. ",
     opties : "N: Bar \nO: Keuken \nZ: Ingang", 
-    item: "",
+    item: [] ,
     N: "Gang",
     O: "Keuken",
     Z: "Ingang",
@@ -164,7 +164,7 @@ locatie = {
   "Buitenterras": {
     title: "Buitenterras",
     description: "Je hebt de parasols nog niet? Je hebt ze wel eerst nodig als je ze wil gebruiken...",
-    opties: "",
+    opties: [],
     item: "",
     N: "Garage",
     Z: "Ingang (3)",
@@ -174,17 +174,11 @@ locatie = {
     title: "Garage",
     description: "Ah, mooi je hebt de garagesleutel, want zonder die sleutel kan je natuurlijk niet binnen. Nu kan je bij de berging waar de parasols voor het buitenterras liggen.",
     opties : "N: Buitenterras \nO: Ingang",
-    item: "",
+    item: [],
     N: "Buitenterras (2)",
     O: "Ingang (2)",
   },
 }
-
-
-
-if True:
-  if locatie[player.location] == "keuken":
-    print('hoi')
 
 #help
 def help_menu(): 
@@ -226,10 +220,17 @@ def print_location():
   print('=' * 45)
   print('Je bent hier: ' + player.location)
   print('\n'+locatie[player.location][description])
-  print('\n' + str(locatie[player.location][item]))
-  print('\nJe kunt hier naartoe gaan:')
-  print(locatie[player.location][opties])
-  print('=' * 45)
+  print(item)
+  if locatie[player.location][item] != 0:
+    print('\n' + str(locatie[player.location][item]))
+    print('\nJe kunt hier naartoe gaan:')
+    print(locatie[player.location][opties])
+    print('=' * 45)
+  else:
+    print('\nJe kunt hier naartoe gaan:')
+    print(locatie[player.location][opties])
+    print('Kies uit: n, o, z, w, g(get), d(drop), i(inventory), of h(help).')
+    print('=' * 45)
 
 #item oppakken 
 #! hele list wordt geplaatst in inventory, veranderen naar alleen variabele!! 
@@ -240,7 +241,7 @@ def pick_up_item():
   if antwoord.lower() in locatie[player.location][item]:
     inventory.append(antwoord)
     print(f'{antwoord} zit nu in je inventory!')
-    del locatie[player.location][item]
+    locatie[player.location][item].remove(antwoord)
   else:
     print('Dit is niet een geldig antwoord. Probeer opnieuw.')
     pick_up_item()
@@ -254,7 +255,7 @@ def drop_item():
     antwoord = input('--> ')
     if antwoord in inventory:
         inventory.remove(antwoord)
-        locatie[player.location][item].append(antwoord)
+        locatie[player.location][item].append(antwoord.lower())
         print(f'{antwoord} is nu gedropt.')
         time.sleep(1)
     else:
