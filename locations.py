@@ -6,8 +6,8 @@ description3 = 'description3'
 item = 'item'
 lijst = 'lijst'
 opties = 'opties'
-dood = 'dood'
-win = 'win'
+gameOver = 'gameOver'
+nodig = 'nodig'
 N = 'n'
 O = 'o'
 Z = 'z'
@@ -25,6 +25,8 @@ locatie = {
     N: "Gang",
     O: "Keuken",
     Z: "Ingang",
+    gameOver : 'nee',
+    nodig : '',
   }, 
   "Gang":{
     title : "Gang",
@@ -36,6 +38,8 @@ locatie = {
     N: "Keuken",
     O: "WC",
     Z: "Eetgedeelte",
+    gameOver : 'nee',
+    nodig : '',
   },
   "Keuken" : {
     title: "Keuken",
@@ -47,6 +51,8 @@ locatie = {
     N: "Bar",
     O: "Gang",
     Z: "Ingang",
+    gameOver : 'nee',
+    nodig : '',
   },
   "Bijkeuken": {
     title : "Bijkeuken",
@@ -57,7 +63,9 @@ locatie = {
     item : [],
     N: "Bar",
     O: "Keuken",
-    Z: "Garage"
+    Z: "Garage",
+    gameOver : 'nee',
+    nodig : '',
   },
   "Opslag": {
     title: "Opslag",
@@ -69,6 +77,8 @@ locatie = {
     N: "Bar",
     O: "Eetgedeelte",
     Z: "Keuken",
+    gameOver : 'nee',
+    nodig : '',
   },
   "WC": {
     title : "WC",
@@ -79,7 +89,9 @@ locatie = {
     item : [],
     N: "",
     O: "",
-    Z: ""
+    Z: "",
+    gameOver : 'nee',
+    nodig : '',
   },
   "Ingang": {
     title: "Ingang",
@@ -89,18 +101,22 @@ locatie = {
     opties : "",
     item: [],
     N: "",
-    O: ""
+    O: "",
+    gameOver : 'nee',
+    nodig : '',
   },
   "Eetgedeelte": {
     title: "Eetgedeelte",
-    description: "Oké, je hebt nog niet instructies gekregen, maar zo te zien zijn er obers nodig. Hoe moeilijk kan het nou zijn om mensen hun bestellingen op te nemen?",
+    description: "Oké, je hebt nog niet instructies gekregen, maar zo te zien zijn er obers nodig. Hoe moeilijk kan het nou zijn om mensen hun bestellingen op te nemen? ",
     description2:"De soep is klaar en iemand moet het serveren... Er is zo te zien een tekort aan obers. Maar hoe moeilijk kan het zijn? Je loopt rechtstreeks naar de tafel die de soep heeft bestelt. ",
     description3:"",
     opties : "N: Bar \nO: Keuken \nZ: Ingang", 
-    item: [] ,
+    item: ['bestelling'] ,
     N: "Gang",
     O: "Keuken",
     Z: "Ingang",
+    gameOver : 'nee',
+    nodig : '',
   },
   "Buitenterras": {
     title: "Buitenterras",
@@ -111,6 +127,8 @@ locatie = {
     item: "",
     N: "Garage",
     Z: "Ingang",
+    gameOver : 'nee',
+    nodig : '',
   },
   "Garage": {
     title: "Garage",
@@ -121,5 +139,7 @@ locatie = {
     item: [],
     N: "Buitenterras",
     O: "Ingang",
+    gameOver : 'nee',
+    nodig : '',
   },
 }

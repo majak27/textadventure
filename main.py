@@ -3,6 +3,10 @@ import sys
 import os
 from locations import locatie
 
+#to do
+# als er een locatie niet is, niet mogelijk om daarnaartoe te gaan
+# probleem: als je meteen op enter drukt bij de eerste locatie ga je al door naar de volgende?
+
 #INVENTORY
 inventory = ['jas']
 
@@ -19,6 +23,8 @@ description3 = 'description3'
 item = 'item'
 lijst = 'lijst'
 opties = 'opties'
+gameOver = 'gameOver' 
+nodig = 'nodig'
 N = 'n'
 O = 'o'
 Z = 'z'
@@ -40,7 +46,7 @@ os.system("clear")
 print('=' * 45)
 print(f"Hallo {player.name}, welkom bij het spel!")
 print('-' * 45)
-print ('Gedurende het spel kun je de volgende letters intoetsen:\ni: inventory (deze is nu nog leeg!) \nh: help (voor als je het even niet meer weet)\ng: get (om een item op te pakken)\nn,o,z,w: om naar verschillende ruimtes te gaan')
+print ('Gedurende het spel kun je de volgende letters intoetsen:\ni: inventory \nh: help (voor als je het even niet meer weet)\ng: get (om een item op te pakken)\nd: drop (om een item neer te leggen\nq: quit (om te stoppen)\nn,o,z,w: om naar verschillende ruimtes te gaan')
 print('-' * 45)
 print("Druk op enter om verder te gaan. ")
 print('=' * 45)
@@ -67,7 +73,7 @@ while True:
     print('=' * 45)
     print('Het doel van het spel is om de juiste objecten\nte vinden door langs verschillende locaties langs te gaan.\n')
     print('Let op! Je antwoorden kunnen maar 1 letter lang zijn')
-    print('\ni: inventory (deze is nu nog leeg!) \nh: help (voor als je het even niet meer weet)\ng: get (om een item op te pakken)\nn,o,z,w: om naar verschillende ruimtes te gaan')
+    print('\ni: inventory \nh: help (voor als je het even niet meer weet)\ng: get (om een item op te pakken)\nd: drop (om een item neer te leggen)\nq: quit (om te stoppen)\nn,o,z,w: om naar verschillende ruimtes te gaan')
     print("\nDruk op 'b' om terug te gaan")
     print('=' * 45)
     menu_opties()
@@ -80,9 +86,25 @@ while True:
     print(inventory)
     print("\nDruk op 'b' om terug te gaan")
     print('=' * 45)
-    menu_opties()
+    inventory_opties()
 
-  #terug kunnen gaan bij menu's
+  def inventory_opties():
+    if locatie[player.location] in bezochteKamers:
+      bezochteKamers.remove(locatie[player.location])
+    elif locatie[player.location] in bezochteKamers2:
+      bezochteKamers2.remove(locatie[player.location])
+    if 'bestelling' in inventory:
+      print('Wil je de bestelling bekijken?')
+    antwoord = input('--> ')
+    if antwoord.lower() == "j":
+      print('Een glas water voor het eetgedeelte.')
+    elif antwoord.lower() == "b":
+      print_location()
+    else:
+      print("Sorry, dit is niet een geldige antwoord, probeer opnieuw.")
+      menu_opties()
+
+  #terug kunnen gaan bij menu
   def menu_opties():
     if locatie[player.location] in bezochteKamers:
       bezochteKamers.remove(locatie[player.location])
@@ -99,26 +121,30 @@ while True:
 
   #toont je locatie
   def print_location():
-    os.system('clear')
-    print('=' * 45)
-    print('Je bent hier: ' + player.location)
-    if locatie[player.location] in bezochteKamers:
-      print('\n'+locatie[player.location][description2])
-      bezochteKamers2.append(locatie[player.location])
-    elif locatie[player.location] in bezochteKamers2:
-      print('\n'+locatie[player.location][description3])
+    if locatie[player.location][nodig] not in inventory:
+      print(f'Je moet {locatie[player.location][nodig]} hebben om naar deze locatie te gaan.')
+    if locatie[player.location][gameOver] == 'ja':
+      game_over()
     else:
-      print('\n'+locatie[player.location][description])
-      bezochteKamers.append(locatie[player.location])
-    if locatie[player.location][item] != 0:
-      print("\nHier ligt:")
-      for x in locatie[player.location][item]:
-        print('* ' + x)
-    print('\nJe kunt hier naartoe gaan:')
-    print(locatie[player.location][opties])
-    print('\nKies uit: n, o, z, w, g(get), d(drop), i(inventory), of h(help).')
-    print('=' * 45)
-
+      os.system('clear')
+      print('=' * 45)
+      print('Je bent hier: ' + player.location)
+      if locatie[player.location] in bezochteKamers:
+        print('\n'+locatie[player.location][description2])
+        bezochteKamers2.append(locatie[player.location])
+      elif locatie[player.location] in bezochteKamers2:
+        print('\n'+locatie[player.location][description3])
+      else:
+        print('\n'+locatie[player.location][description])
+        bezochteKamers.append(locatie[player.location])
+      if locatie[player.location][item] != 0:
+        print("\nHier ligt:")
+        for x in locatie[player.location][item]:
+          print('* ' + x)
+      print('\nJe kunt hier naartoe gaan:')
+      print(locatie[player.location][opties])
+      print('\nKies uit: n, o, z, w, g(get), d(drop), i(inventory), of h(help).')
+      print('=' * 45)
 
   #item oppakken 
   def pick_up_item():
@@ -145,18 +171,17 @@ while True:
     print('Welk item wil je droppen?')
     antwoord = input('--> ')
     if antwoord.lower() in inventory:
-        inventory.remove(antwoord.lower())
-        locatie[player.location][item].append(antwoord.lower())
-        print(f'{antwoord} is nu gedropt.')
-        if locatie[player.location] in bezochteKamers:
-          bezochteKamers.remove(locatie[player.location])
-        elif locatie[player.location] in bezochteKamers2:
-          bezochteKamers2.remove(locatie[player.location])
-          print_location()
+      inventory.remove(antwoord.lower())
+      locatie[player.location][item].append(antwoord.lower())
+      print(f'{antwoord} is nu gedropt.')
+      if locatie[player.location] in bezochteKamers:
+        bezochteKamers.remove(locatie[player.location])
+      elif locatie[player.location] in bezochteKamers2:
+        bezochteKamers2.remove(locatie[player.location])
+        print_location()
     else:
-        print(f'Je hebt {antwoord.lower()} niet in je inventory! Probeer opnieuw.')
-        drop_item()
-    
+      print(f'Je hebt {antwoord.lower()} niet in je inventory! Probeer opnieuw.')
+      drop_item()
     
   #naar andere ruimtes gaan
   def move_speler(move_actie):
@@ -209,7 +234,7 @@ while True:
       move_speler(move_actie)
     else:
       print('Sorry, dit is niet een geldige optie, probeer opnieuw')
-      options()
+      game_loop()
   
   game_loop()
 
