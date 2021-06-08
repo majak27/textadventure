@@ -29,23 +29,49 @@ O = 'o'
 Z = 'z'
 W = 'w'
 
-#SCHERM1
+def typewriter():
+  if effect.lower() == 's':
+    for char in text: 
+      sys.stdout.write(char)
+      sys.stdout.flush()
+      time.sleep (0.02)
+  elif effect.lower() == 'l':
+    for char in text: 
+      sys.stdout.write(char)
+      sys.stdout.flush()
+      time.sleep (0.05)
+  elif effect.lower() == 'g':
+    print(text)
+  else:
+    print('Geen geldige optie probeer opnieuw')
+    time.sleep(2)
+    typewriter()
+
 print('=' * 45)
-print('Welkom bij het Restaurant Drama!\nDruk op enter om verder te gaan')
+print('Voor we beginnen; wil je: \n(s) snelle animaties,\n(l) langzame animaties\n(g) geen animaties')
+print('=' * 45)
+effect = input('--> ')
+text = 'ok'
+typewriter() 
+#SCHERM1
+os.system('clear')
+print('=' * 45)
+text = 'Welkom bij het Restaurant Drama!\nDruk op enter om verder te gaan'
+typewriter()
 antwoord = input()
 os.system('clear')
 
 #SCHERM2
 print('=' * 45)
-print('Wat is je naam?')
+text = 'Wat is je naam?\n'
+typewriter()
 player.name = input('--> ')
 os.system("clear")
 
 #SCHERM3
 print('=' * 45)
-print(f"Hallo {player.name}, welkom bij het spel!")
-print('-' * 45)
-print ('Gedurende het spel kun je de volgende letters intoetsen:\ni: inventory \nh: help (voor als je het even niet meer weet)\ng: get (om een item op te pakken)\nd: drop (om een item neer te leggen\nq: quit (om te stoppen)\nn,o,z,w: om naar verschillende ruimtes te gaan\n\nLet op! Je antwoorden mogen maar 1 letter lang zijn (behalve bij het kiezen van een object om op te pakken)')
+text = f"Hallo {player.name}, welkom bij het spel!\n{'-' * 45 }\nGedurende het spel kun je de volgende letters intoetsen:\ni: inventory \nh: help (voor als je het even niet meer weet)\ng: get (om een item op te pakken)\nd: drop (om een item neer te leggen\nq: quit (om te stoppen)\nn,o,z,w: om naar verschillende ruimtes te gaan\n\nLet op! Je antwoorden mogen maar 1 letter lang zijn (behalve bij het kiezen van een object om op te pakken)\n"
+typewriter()
 print('-' * 45)
 print("Druk op enter om verder te gaan. ")
 print('=' * 45)
@@ -54,11 +80,13 @@ os.system("clear")
 
 #SCHERM4
 print('=' * 45)
-print(f"Je zit aan de bar met een drankje in een restaurant.\nHet is er druk. Je ziet mensen drinken, praten en het gezellig hebben. Je voelt je alleen. Je wil je drankje afrekenen en begint te zoeken naar je portemonnee, maar hij is weg.\nNog voordat je iets kan zeggen zegt een mannenstem:\n‘Ik betaal het drankje voor beste {player.name} hier!\nHet is de manager. Hij heeft hulp nodig voor klusjes in en rondom het restaurant. Het restaurant heeft namelijk door de coronacrisis een tekort aan personeel met slechtere opbrengsten als gevolg. Het mag niet failliet gaan, want dit is jouw lievelings restaurant.\n\nJe moet de manager helpen!")
+text = f"Je zit aan de bar met een drankje in een restaurant.\nHet is er druk. Je ziet mensen drinken, praten en het gezellig hebben. Je voelt je alleen. Je wil je drankje afrekenen en begint te zoeken naar je portemonnee, maar hij is weg.\nNog voordat je iets kan zeggen zegt een mannenstem:\n‘Ik betaal het drankje voor beste {player.name} hier!\nHet is de manager. Hij heeft hulp nodig voor klusjes in en rondom het restaurant. Het restaurant heeft namelijk door de coronacrisis een tekort aan personeel met slechtere opbrengsten als gevolg. Het mag niet failliet gaan, want dit is jouw lievelings restaurant.\n\nJe moet de manager helpen!\n"
+typewriter()
 print('=' * 45)
 print("Druk op enter om de manager te helpen met zijn taken")
 antwoord = input()
 os.system('clear')
+
 
 while True:
   bezochteKamers = []
