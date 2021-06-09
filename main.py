@@ -6,6 +6,7 @@ from locations import locatie
 #to do
 # probleem: als je meteen op enter drukt bij de eerste locatie ga je al door naar de volgende?
 # game opnieuw kunnen spelen
+# verplichten naam invullen
 
 #INVENTORY
 inventory = ['','jas']
@@ -104,7 +105,7 @@ while True:
     print('\ni: inventory \nh: help (voor als je het even niet meer weet)\ng: get (om een item op te pakken)\nd: drop (om een item neer te leggen)\nq: quit (om te stoppen)\nn,o,z,w: om naar verschillende ruimtes te gaan')
     print("\nDruk op 'b' om terug te gaan")
     print('=' * 45)
-    menu_opties()
+    inventory_opties()
 
   #inventory
   def inventory_menu():
@@ -128,10 +129,10 @@ while True:
   def inventory_opties():
     antwoord = input('--> ')
     if antwoord.lower() == "b":
-      print_location()
+      game_loop()
     else:
       print("Sorry, dit is niet een geldige antwoord, probeer opnieuw.")
-    menu_opties()
+    inventory_opties()
 
   #terug kunnen gaan bij menu
   def menu_opties():
@@ -187,7 +188,7 @@ while True:
       inventory.append(antwoord.lower())
       print(f'{antwoord} zit nu in je inventory!')
       locatie[player.location][item].remove(antwoord.lower())
-      print_location()
+      game_loop()
     else:
       print('Dit is niet een geldig antwoord. Probeer opnieuw.')
       time.sleep(1)
@@ -202,7 +203,7 @@ while True:
       inventory.remove(antwoord.lower())
       locatie[player.location][item].append(antwoord.lower())
       print(f'{antwoord} is nu gedropt.')
-      print_location()
+      game_loop()
     else:
       print(f'Je hebt {antwoord.lower()} niet in je inventory! Probeer opnieuw.')
       drop_item()
