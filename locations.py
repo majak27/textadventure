@@ -17,11 +17,11 @@ W = 'w'
 locatie = {
   "Bar": {
     title : "Bar",
-    description : "Hier kan je een drankje doen, maar om de manager te helpen zal je eerst moeten beginnen met je jas ophangen...",
+    description : "Hier kan je een drankje doen, maar om de manager te helpen zal je toch echt eerst moeten gaan werken. (Tip: pak de bestelling en bekijk hem in je inventory!)",
     description2 : 'Je krijgt snel een obersschort toegeworpen en richting de eerste de beste tafel toegestuurd om de bestellingen op te nemen. Maar door alle stress over de soep vergeet je helemaal de bestellingen. Het restaurant krijgt slechte reviews: Slechte obers, bestelling verkeerd opgenomen". [game over]',
     description3: "Ahhh, eindelijk even relaxen na al dat harde werken voor maar 1 gerecht. Je hebt het werken in een restaurant onderschat. Je vraagt de barman om een biertje. Je vergeet even helemaal dat je nog in je werktijd zit. Even later geeft de manger je je laatste taak voor vandaag: parasols uitklappen op het buitenterras (hint: de parasols liggen in de garage).",
     opties : "N: Gang\nO: Keuken\nZ: Ingang",
-    item : ['object'],
+    item : ['bestelling'],
     N: "Gang",
     O: "Keuken",
     Z: "Ingang",
@@ -41,7 +41,7 @@ locatie = {
     Z: "Eetgedeelte",
     W: "Gang",
     gameOver : 'nee',
-    nodig : 'ding',
+    nodig : '',
   },
   "Keuken" : {
     title: "Keuken",

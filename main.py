@@ -70,7 +70,7 @@ os.system("clear")
 
 #SCHERM3
 print('=' * 45)
-text = f"Hallo {player.name}, welkom bij het spel!\n{'-' * 45 }\nGedurende het spel kun je de volgende letters intoetsen:\ni: inventory \nh: help (voor als je het even niet meer weet)\ng: get (om een item op te pakken)\nd: drop (om een item neer te leggen\nq: quit (om te stoppen)\nn,o,z,w: om naar verschillende ruimtes te gaan\n\nLet op! Je antwoorden mogen maar 1 letter lang zijn (behalve bij het kiezen van een object om op te pakken)\n"
+text = f"Hallo {player.name}, welkom bij het spel!\n{'-' * 45 }\nGedurende het spel kun je de volgende letters intoetsen:\ni: inventory \nh: help (voor als je het even niet meer weet)\ng: get (om een item op te pakken)\nd: drop (om een item neer te leggen\nq: quit (om te stoppen)\nn,o,z,w: om naar verschillende ruimtes te gaan\n\nLet op! Je antwoorden mogen maar 1 letter lang zijn (behalve bij het kiezen van een object)\n"
 typewriter()
 print('-' * 45)
 print("Druk op enter om verder te gaan. ")
@@ -99,7 +99,7 @@ while True:
     print('HELP!')
     print('=' * 45)
     print('Het doel van het spel is om de juiste objecten\nte vinden door langs verschillende locaties langs te gaan.\n')
-    print('Let op! Je antwoorden kunnen maar 1 letter lang zijn')
+    print('Let op! Je antwoorden kunnen maar 1 letter lang zijn (behalve wanneer je een item kiest.)\n')
     print('\ni: inventory \nh: help (voor als je het even niet meer weet)\ng: get (om een item op te pakken)\nd: drop (om een item neer te leggen)\nq: quit (om te stoppen)\nn,o,z,w: om naar verschillende ruimtes te gaan')
     print("\nDruk op 'b' om terug te gaan")
     print('=' * 45)
@@ -124,14 +124,15 @@ while True:
       bezochteKamers2.remove(locatie[player.location])
     if 'bestelling' in inventory:
       print('Wil je de bestelling bekijken?')
-    antwoord = input('--> ')
-    if antwoord.lower() == "j":
-      print('Een glas water voor het eetgedeelte.')
-    elif antwoord.lower() == "b":
-      print_location()
-    else:
-      print("Sorry, dit is niet een geldige antwoord, probeer opnieuw.")
-      menu_opties()
+      antwoord = input('--> ')
+      if antwoord.lower() == "j":
+        print('Een glas water voor het eetgedeelte.')
+        print("Druk op 'b' om terug te gaan.")
+      elif antwoord.lower() == "b":
+        print_location()
+      else:
+        print("Sorry, dit is niet een geldige antwoord, probeer opnieuw.")
+    menu_opties()
 
   #terug kunnen gaan bij menu
   def menu_opties():
