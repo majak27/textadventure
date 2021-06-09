@@ -93,9 +93,6 @@ antwoord = input()
 os.system('clear')
 
 while True:
-  bezochteKamers = []
-  bezochteKamers2 = []
-
   #help
   def help_menu(): 
     os.system("clear")
@@ -117,40 +114,34 @@ while True:
     for x in inventory:
       if x != '':
         print('*'+ x)
+    print('\nEr zijn 3 opdrachten in totaal. Hieronder staan de taken die je hebt gevonden:')
+    if 'bestelling' in inventory:
+      print('* bestelling: Bereid een glas water  voor en lever het bij het eetgedeelte.')
+    if 'parasol taak' in inventory:
+      print('* parasol taak: Zoek naar de parasols en breng ze naar het buitenterras.')
+    if 'champignon taak' in inventory:
+      print('* champignon taak: Zoek de champignons en breng ze naar de keuken.')
     print("\nDruk op 'b' om terug te gaan")
     print('=' * 45)
     inventory_opties()
 
   def inventory_opties():
-    if locatie[player.location] in bezochteKamers:
-      bezochteKamers.remove(locatie[player.location])
-    elif locatie[player.location] in bezochteKamers2:
-      bezochteKamers2.remove(locatie[player.location])
-    if 'bestelling' in inventory:
-      print('Wil je de bestelling bekijken?')
-      antwoord = input('--> ')
-      if antwoord.lower() == "j":
-        print('Een glas water voor het eetgedeelte.')
-        print("Druk op 'b' om terug te gaan.")
-      elif antwoord.lower() == "b":
-        print_location()
-      else:
-        print("Sorry, dit is niet een geldige antwoord, probeer opnieuw.")
+    antwoord = input('--> ')
+    if antwoord.lower() == "b":
+      print_location()
+    else:
+      print("Sorry, dit is niet een geldige antwoord, probeer opnieuw.")
     menu_opties()
 
   #terug kunnen gaan bij menu
   def menu_opties():
-    if locatie[player.location] in bezochteKamers:
-      bezochteKamers.remove(locatie[player.location])
-    elif locatie[player.location] in bezochteKamers2:
-      bezochteKamers2.remove(locatie[player.location])
     antwoord = input('--> ')
     if antwoord.lower() == "j":
       game_over()
     if antwoord.lower() == "b":
       print_location()
     else:
-      print("Sorry, dit is niet een geldige antwoord, probeer opnieuw.")
+      print("Sorry, dit is niet een geldig antwoord, probeer opnieuw.")
       menu_opties()
 
   def nog_nodig():
@@ -196,10 +187,6 @@ while True:
       inventory.append(antwoord.lower())
       print(f'{antwoord} zit nu in je inventory!')
       locatie[player.location][item].remove(antwoord.lower())
-      if locatie[player.location] in bezochteKamers:
-        bezochteKamers.remove(locatie[player.location])
-      elif locatie[player.location] in bezochteKamers2:
-        bezochteKamers2.remove(locatie[player.location])
       print_location()
     else:
       print('Dit is niet een geldig antwoord. Probeer opnieuw.')
@@ -215,11 +202,7 @@ while True:
       inventory.remove(antwoord.lower())
       locatie[player.location][item].append(antwoord.lower())
       print(f'{antwoord} is nu gedropt.')
-      if locatie[player.location] in bezochteKamers:
-        bezochteKamers.remove(locatie[player.location])
-      elif locatie[player.location] in bezochteKamers2:
-        bezochteKamers2.remove(locatie[player.location])
-        print_location()
+      print_location()
     else:
       print(f'Je hebt {antwoord.lower()} niet in je inventory! Probeer opnieuw.')
       drop_item()
@@ -251,7 +234,7 @@ while True:
     elif antwoord.lower() == 'n':
       game_over()
     else: 
-      print('Dit is niet een geldige optie, probeer opnieuw.')
+      print('Dit is niet een geldig antwoord, probeer opnieuw.')
       win()
     sys.exit
 
@@ -268,7 +251,7 @@ while True:
       game_over()
     else: 
       print('Dit is niet een geldige optie, probeer opnieuw.')
-      win()
+      game_over()
 
   #game over scherm
   def game_over_locatie():
@@ -284,7 +267,7 @@ while True:
   #GAMELOOP
   def game_loop():
     glasWater = {'glas', 'water'}
-    if glasWater in locatie['Gang'][item] and 'champignons' in locatie['keuken'][item]:
+    if glasWater in locatie['Gang'][item] and 'champignons' in locatie['Keuken'][item] and 'parasols' in locatie['Buitenterras'][item]:
       win()
     else:
       print_location()
