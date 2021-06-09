@@ -24,6 +24,7 @@ item = 'item'
 lijst = 'lijst'
 opties = 'opties'
 descriptionItems = 'descriptionItems'
+descriptionItems2 = 'descriptionItems2'
 gameOver = 'gameOver' 
 nodig = 'nodig'
 N = 'n'
@@ -172,6 +173,8 @@ while True:
       print('Je bent hier: ' + player.location)
       if locatie[player.location][descriptionItems] in inventory:
         print('\n'+locatie[player.location][description2])
+      elif locatie[player.location][descriptionItems2] in inventory:
+        print('\n'+locatie[player.location][description3])
       else:
         print('\n'+locatie[player.location][description])
       if locatie[player.location][item] != 0:
