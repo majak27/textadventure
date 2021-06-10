@@ -6,7 +6,7 @@ from locations import locatie
 #to do
 # probleem: als je meteen op enter drukt bij de eerste locatie ga je al door naar de volgende?
 # game opnieuw kunnen spelen
-# verplichten naam invullen
+# verplichten naam invullen?
 
 #INVENTORY
 inventory = ['','jas']
@@ -34,17 +34,17 @@ Z = 'z'
 W = 'w'
 
 def typewriter():
-  if effect.lower() == 's':
+  if effect.lower().strip() == 's':
     for char in text: 
       sys.stdout.write(char)
       sys.stdout.flush()
       time.sleep (0.02)
-  elif effect.lower() == 'l':
+  elif effect.lower().strip() == 'l':
     for char in text: 
       sys.stdout.write(char)
       sys.stdout.flush()
       time.sleep (0.05)
-  elif effect.lower() == 'g':
+  elif effect.lower().strip() == 'g':
     print(text)
   else:
     print('Geen geldige optie probeer opnieuw')
@@ -94,6 +94,7 @@ antwoord = input()
 os.system('clear')
 
 while True:
+  itemDingetjes = []
   #help
   def help_menu(): 
     os.system("clear")
@@ -128,7 +129,7 @@ while True:
 
   def inventory_opties():
     antwoord = input('--> ')
-    if antwoord.lower() == "b":
+    if antwoord.lower().strip() == "b":
       game_loop()
     else:
       print("Sorry, dit is niet een geldige antwoord, probeer opnieuw.")
@@ -137,9 +138,9 @@ while True:
   #terug kunnen gaan bij menu
   def menu_opties():
     antwoord = input('--> ')
-    if antwoord.lower() == "j":
+    if antwoord.lower().strip() == "j":
       game_over()
-    if antwoord.lower() == "b":
+    if antwoord.lower().strip() == "b":
       print_location()
     else:
       print("Sorry, dit is niet een geldig antwoord, probeer opnieuw.")
@@ -163,7 +164,8 @@ while True:
       os.system('clear')
       print('=' * 45)
       print('Je bent hier: ' + player.location)
-      if locatie[player.location][descriptionItems] in inventory:
+      if locatie[player.location][descriptionItems] in inventory or locatie[player.location][descriptionItems] in itemDingetjes:
+        itemDingetjes.append(locatie[player.location][descriptionItems])
         print('\n'+locatie[player.location][description2])
       elif locatie[player.location][descriptionItems2] in inventory:
         print('\n'+locatie[player.location][description3])
@@ -184,10 +186,10 @@ while True:
     print('Kies uit:' + str(locatie[player.location][item]))
     antwoord = input ('--> ')
     #if antwoord.lower()
-    if antwoord.lower() in locatie[player.location][item]:
+    if antwoord.lower().strip() in locatie[player.location][item]:
       inventory.append(antwoord.lower())
       print(f'{antwoord} zit nu in je inventory!')
-      locatie[player.location][item].remove(antwoord.lower())
+      locatie[player.location][item].remove(antwoord.lower().strip())
       game_loop()
     else:
       print('Dit is niet een geldig antwoord. Probeer opnieuw.')
@@ -199,7 +201,7 @@ while True:
     print(inventory)
     print('Welk item wil je droppen?')
     antwoord = input('--> ')
-    if antwoord.lower() in inventory:
+    if antwoord.lower().strip() in inventory:
       inventory.remove(antwoord.lower())
       locatie[player.location][item].append(antwoord.lower())
       print(f'{antwoord} is nu gedropt.')
@@ -230,9 +232,9 @@ while True:
     print('=' * 45)
     print('Wil je opnieuw spelen? (j/n)')
     antwoord = input('--> ')
-    if antwoord.lower() == 'j':
+    if antwoord.lower().strip() == 'j':
       print('game nog resetten')
-    elif antwoord.lower() == 'n':
+    elif antwoord.lower().strip() == 'n':
       game_over()
     else: 
       print('Dit is niet een geldig antwoord, probeer opnieuw.')
@@ -246,9 +248,9 @@ while True:
     print('=' * 45)
     print('Wil je opnieuw spelen? (j/n)')
     antwoord = input('--> ')
-    if antwoord.lower() == 'j':
+    if antwoord.lower().strip() == 'j':
       print('moeten we nog doen**')
-    elif antwoord.lower() == 'n':
+    elif antwoord.lower().strip() == 'n':
       game_over()
     else: 
       print('Dit is niet een geldige optie, probeer opnieuw.')
@@ -267,32 +269,31 @@ while True:
 
   #GAMELOOP
   def game_loop():
-    glasWater = {'glas', 'water'}
-    if glasWater in locatie['Gang'][item] and 'champignons' in locatie['Keuken'][item] and 'parasols' in locatie['Buitenterras'][item]:
+    if "glas water" in locatie['Eetgedeelte'][item] and 'champignons' in locatie['Keuken'][item] and 'parasols' in locatie['Buitenterras'][item]:
       win()
     else:
       print_location()
       nextRoom = input('--> ')
-      if nextRoom.lower() == "h":
+      if nextRoom.lower().strip() == "h":
         help_menu()
-      elif nextRoom.lower() == "g":
+      elif nextRoom.lower().strip() == "g":
         pick_up_item()
-      elif nextRoom.lower() == "d":
+      elif nextRoom.lower().strip() == "d":
         drop_item()
-      elif nextRoom.lower() == "i":
+      elif nextRoom.lower().strip() == "i":
         inventory_menu()
-      elif nextRoom.lower() == "q":
+      elif nextRoom.lower().strip() == "q":
         stop_screen()
-      elif nextRoom.lower() == 'n':
+      elif nextRoom.lower().strip() == 'n':
         move_actie = locatie[player.location][N]
         move_speler(move_actie)
-      elif nextRoom.lower() == 'o':
+      elif nextRoom.lower().strip() == 'o':
         move_actie = locatie[player.location][O]
         move_speler(move_actie)
-      elif nextRoom.lower() == 'z':
+      elif nextRoom.lower().strip() == 'z':
         move_actie = locatie[player.location][Z]
         move_speler(move_actie)
-      elif nextRoom.lower() == 'w':
+      elif nextRoom.lower().strip() == 'w':
         move_actie = locatie[player.location][W]
         move_speler(move_actie)
       else:
