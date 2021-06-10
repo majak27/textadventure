@@ -19,7 +19,7 @@ W = 'w'
 locatie = {
   "Bar": {
     title : "Bar",
-    description : "Hier kan je een drankje doen, maar om de manager te helpen zal je toch echt eerst moeten gaan werken. (Tip: pak de bestelling en bekijk hem in je inventory!)",
+    description : "Hier kan je een drankje doen, maar om de manager te helpen zal je toch echt eerst moeten gaan werken. (Tip: taken kun je oppakken en vervolgens in je inventory uitgebreid bekijken!)",
     descriptionItems : '1',
     descriptionItems2 : '1',
     opties : "N: Keuken\nO: Gang\nZ: Eetgedeelte\nW: Opslag",
@@ -34,8 +34,6 @@ locatie = {
   "Gang":{
     title : "Gang",
     description:"Je bent bij een kapstok. Handig, want je hebt nog al je waardevolle spullen in je jaszak zitten. Je hangt je jas op. Je ziet in je ooghoek een sleutel met het woord 'garage' erop staan. \nZo nu kan je aan het werk!",
-    description2:"",
-    description3:"",
     descriptionItems : '1',
     descriptionItems2 : '1',
     opties : "N: Keuken\nO: WC\nZ: Eetgedeelte\nW: Bar",
@@ -50,7 +48,7 @@ locatie = {
   "Keuken" : {
     title: "Keuken",
     description: "Wat goed dat je er bent. We waren al aan het wachten op onze redder in nood. We wilden net champignonsoep maken, maar er is geen champignon meer in de voorraadkast van de keuken. Misschien ligt er ergens anders in het restaurant nog een voorraad aan voedsel?",
-    description2: "Ah, fijn! Je hebt de champignons gevonden. Je snijdt ze snel in stukjes en doet ze in de pan en begint de soep te roeren. Na een paar minuten flink geroert te hebben, giet je de soep voorzichtig op de borden. De soep wordt meteen geserveerd en valt gelukkig goed in de smaak.",
+    description2: "Ah, fijn! Je hebt de champignons gevonden. Laat ze hier maar achter, dan snijden wij ze snel in stukjes om in de pan te doen.\n! De soep wordt meteen geserveerd en valt gelukkig goed in de smaak.",
     descriptionItems : 'champignons',
     descriptionItems2 : '1',
     opties: "N: Bijkeuken\nO: Gang\nZ: Bar\nW: Opslag",
@@ -64,13 +62,13 @@ locatie = {
   },
   "Bijkeuken": {
     title : "Bijkeuken",
-    description : "Wanneer je alle borden grondig hebt afgewassen komt de manager blij naar je toe met nog een taak voor jou vandaag. Je moet parasols op het buitenterras neerzetten (TIP: de parasols vindt je in de garage, verder is het ook handig de taak op te pakken; zo kun je overal je opdracht bekijken.)",
+    description : "Wanneer je alle borden grondig hebt afgewassen komt de manager blij naar je toe met nog een taak voor jou vandaag. Je moet parasols op het buitenterras neerzetten (TIP: de parasols vindt je in de garage!)",
     descriptionItems : '1',
     descriptionItems2 : '1',
     opties : "Z: Keuken",
     item : ['glas water', 'parasol taak'],
     N: "Bijkeuken",
-    O: "Bjikeuken",
+    O: "Bijkeuken",
     Z: "Keuken",
     W: "Bijkeuken",
     gameOver : 'nee',
@@ -85,7 +83,7 @@ locatie = {
     descriptionItems2 : '1',
     opties : "N: Achteringang\nO: Keuken \nZ: Bar\nW: Garage",
     item : ['champignons'],
-    N: "Opslag",
+    N: "Achteringang",
     O: "Keuken",
     Z: "Bar",
     W: "Garage",

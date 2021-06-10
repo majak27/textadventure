@@ -3,11 +3,6 @@ import sys
 import os
 from locations import locatie
 
-#to do
-# probleem: als je meteen op enter drukt bij de eerste locatie ga je al door naar de volgende?
-# game opnieuw kunnen spelen
-# verplichten naam invullen?
-
 #INVENTORY
 inventory = ['','jas']
 
@@ -33,6 +28,7 @@ O = 'o'
 Z = 'z'
 W = 'w'
 
+os.system('clear')
 def typewriter():
   if effect.lower().strip() == 's':
     for char in text: 
@@ -90,7 +86,7 @@ text = f"Je zit aan de bar met een drankje in een restaurant.\nHet is er druk. J
 typewriter()
 print('=' * 45)
 print("Druk op enter om de manager te helpen met zijn taken")
-antwoord = input()
+input()
 os.system('clear')
 
 while True:
@@ -118,7 +114,7 @@ while True:
         print('*'+ x)
     print('\nEr zijn 3 opdrachten in totaal. Hieronder staan de taken die je hebt gevonden:')
     if 'bestelling' in inventory:
-      print('* bestelling: Bereid een glas water  voor en lever het bij het eetgedeelte.')
+      print('* bestelling: Zoek naar een glas water en lever het bij het eetgedeelte.')
     if 'parasol taak' in inventory:
       print('* parasol taak: Zoek naar de parasols en breng ze naar het buitenterras.')
     if 'champignon taak' in inventory:
@@ -208,6 +204,7 @@ while True:
       game_loop()
     else:
       print(f'Je hebt {antwoord.lower()} niet in je inventory! Probeer opnieuw.')
+      time.sleep(2)
       drop_item()
     
   #naar andere ruimtes gaan
@@ -230,31 +227,16 @@ while True:
     print('=' * 45)
     print('JE HEBT DE TAAK VOLTOOID!')
     print('=' * 45)
-    print('Wil je opnieuw spelen? (j/n)')
-    antwoord = input('--> ')
-    if antwoord.lower().strip() == 'j':
-      print('game nog resetten')
-    elif antwoord.lower().strip() == 'n':
-      game_over()
-    else: 
-      print('Dit is niet een geldig antwoord, probeer opnieuw.')
-      win()
-    sys.exit
-
+    time.sleep(5)
+    os.system('clear')
+   
   def game_over():
     os.system('clear')
     print('=' * 45)
     print('GAME OVER')
     print('=' * 45)
-    print('Wil je opnieuw spelen? (j/n)')
-    antwoord = input('--> ')
-    if antwoord.lower().strip() == 'j':
-      print('moeten we nog doen**')
-    elif antwoord.lower().strip() == 'n':
-      game_over()
-    else: 
-      print('Dit is niet een geldige optie, probeer opnieuw.')
-      game_over()
+    time.sleep(5)
+    os.system('clear')
 
   #game over scherm
   def game_over_locatie():
