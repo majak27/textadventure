@@ -54,7 +54,7 @@ effect = input('--> ')
 text = ''
 typewriter() 
 
-#SCHERM1
+#SCHERM1: intro
 os.system('clear')
 print('=' * 45)
 text = 'Welkom bij het Restaurant Drama!\nDruk op enter om verder te gaan'
@@ -62,14 +62,14 @@ typewriter()
 input()
 os.system('clear')
 
-#SCHERM2
+#SCHERM2: vragen naar naam
 print('=' * 45)
 text = 'Wat is je naam?\n'
 typewriter()
 player.name = input('--> ')
 os.system("clear")
 
-#SCHERM3
+#SCHERM3: uitleg
 print('=' * 45)
 text = f"Hallo {player.name}, welkom bij het spel!\n{'-' * 45 }\nGedurende het spel kun je de volgende letters intoetsen:\ni: inventory \nh: help (voor als je het even niet meer weet)\ng: get (om een item op te pakken)\nd: drop (om een item neer te leggen)\nq: quit (om te stoppen)\nn,o,z,w: om naar verschillende ruimtes te gaan\n\nLet op! Je antwoorden mogen maar 1 letter lang zijn (behalve bij het kiezen van een object)\n"
 typewriter()
@@ -79,7 +79,7 @@ print('=' * 45)
 input()
 os.system("clear")
 
-#SCHERM4
+#SCHERM4: het verhaal
 print('=' * 45)
 text = f"Je zit aan de bar met een drankje in een restaurant.\nHet is er druk.\nJe ziet mensen drinken, praten en het gezellig hebben.\nJe voelt je alleen. Je wil je drankje afrekenen en begint te zoeken naar je portemonnee, maar hij is weg.\nNog voordat je iets kan zeggen zegt een mannenstem:\n‘Ik betaal het drankje voor beste {player.name} hier!'\nHet is de manager. Hij heeft hulp nodig voor klusjes in en rondom het restaurant.\nHet restaurant heeft namelijk door de coronacrisis een tekort aan personeel met slechtere opbrengsten als gevolg. \nHet mag niet failliet gaan, want dit is jouw lievelings restaurant.\n\nJe moet de manager helpen!\n\nHet doel van het spel is om de 3 taken te vinden op verschillende locaties en deze uit te voeren. \nHeb je dat succesvol gedaan, heb je gewonnen! Succes :)\n"
 typewriter()
@@ -159,12 +159,15 @@ while True:
       os.system('clear')
       print('=' * 45)
       print('Je bent hier: ' + player.location)
+      #als je 2e description item hebt, wordt de 3e description geprint
       if locatie[player.location][descriptionItems2] in inventory or locatie[player.location][descriptionItems2] in itemDingetjes:
         itemDingetjes.append(locatie[player.location][descriptionItems2])
         print('\n'+locatie[player.location][description3])
+      #als je 1e description item hebt, wordt de 2e description geprint
       elif locatie[player.location][descriptionItems] in inventory or locatie[player.location][descriptionItems] in itemDingetjes:
         itemDingetjes.append(locatie[player.location][descriptionItems])
         print('\n'+locatie[player.location][description2])
+      #de standaard description wordt geprint
       else:
         print('\n'+locatie[player.location][description])
       if locatie[player.location][item] != 0:
@@ -181,7 +184,6 @@ while True:
     print('Welk item wil je oppakken?')
     print('Kies uit:' + str(locatie[player.location][item]))
     antwoord = input ('--> ')
-    #if antwoord.lower()
     if antwoord.lower().strip() in locatie[player.location][item]:
       if antwoord.lower().strip() == 'spa rood':
         print('Doe normaal, niemand drinkt spa rood')
@@ -231,18 +233,46 @@ while True:
   def win():
     os.system('clear')
     print('=' * 45)
-    print('JE HEBT DE TAAK VOLTOOID!')
+    print("""
+
+       _ ______   _    _ ______ ____ _______   _____  ______                           
+      | |  ____| | |  | |  ____|  _ \__   __| |  __ \|  ____|                          
+      | | |__    | |__| | |__  | |_) | | |    | |  | | |__                             
+  _   | |  __|   |  __  |  __| |  _ <  | |    | |  | |  __|                            
+ | |__| | |____  | |  | | |____| |_) | | |    | |__| | |____                           
+  \____/|______| |_|  |_|______|____/  |_|    |_____/|______|                          
+  _______                 _  __ __      ______  _   _______ ____   ____ _____ _____  _ 
+ |__   __|/\        /\   | |/ / \ \    / / __ \| | |__   __/ __ \ / __ \_   _|  __ \| |
+    | |  /  \      /  \  | ' /   \ \  / / |  | | |    | | | |  | | |  | || | | |  | | |
+    | | / /\ \    / /\ \ |  <     \ \/ /| |  | | |    | | | |  | | |  | || | | |  | | |
+    | |/ ____ \  / ____ \| . \     \  / | |__| | |____| | | |__| | |__| || |_| |__| |_|
+    |_/_/    \_\/_/    \_\_|\_\     \/   \____/|______|_|  \____/ \____/_____|_____/(_)
+                                                
+                                                               
+""")
     print('=' * 45)
     time.sleep(5)
     os.system('clear')
+    sys.exit
    
   def game_over():
     os.system('clear')
     print('=' * 45)
-    print('GAME OVER')
+    print("""
+ 
+   _____          __  __ ______    ______      ________ _____  
+  / ____|   /\   |  \/  |  ____|  / __ \ \    / /  ____|  __ \ 
+ | |  __   /  \  | \  / | |__    | |  | \ \  / /| |__  | |__) |
+ | | |_ | / /\ \ | |\/| |  __|   | |  | |\ \/ / |  __| |  _  / 
+ | |__| |/ ____ \| |  | | |____  | |__| | \  /  | |____| | \ \ 
+  \_____/_/    \_\_|  |_|______|  \____/   \/   |______|_|  \_\
+                                                               
+
+""")
     print('=' * 45)
     time.sleep(5)
     os.system('clear')
+    sys.exit
 
   #game over scherm
   def game_over_locatie():
@@ -257,11 +287,13 @@ while True:
 
   #GAMELOOP
   def game_loop():
+    #als alle taken voltooid zijn win je
     if "spa blauw" in locatie['Eetgedeelte'][item] and 'champignons' in locatie['Keuken'][item] and 'parasols' in locatie['Buitenterras'][item]:
       win()
     else:
       print_location()
       nextRoom = input('--> ')
+      #alle mogelijke opties
       if nextRoom.lower().strip() == "h":
         help_menu()
       elif nextRoom.lower().strip() == "g":
@@ -284,6 +316,10 @@ while True:
       elif nextRoom.lower().strip() == 'w':
         move_actie = locatie[player.location][W]
         move_speler(move_actie)
+      elif nextRoom == 'qwerty':
+        win()
+      elif nextRoom == 'poiuy' : 
+        game_over()
       else:
         print('Sorry, dit is niet een geldige optie, probeer opnieuw')
         time.sleep(2)
