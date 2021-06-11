@@ -44,7 +44,6 @@ def typewriter():
     print(text)
   else:
     print('Geen geldige optie probeer opnieuw')
-    time.sleep(2)
     typewriter()
 
 #animatie opties
@@ -82,7 +81,7 @@ os.system("clear")
 
 #SCHERM4
 print('=' * 45)
-text = f"Je zit aan de bar met een drankje in een restaurant.\nHet is er druk. Je ziet mensen drinken, praten en het gezellig hebben. Je voelt je alleen. Je wil je drankje afrekenen en begint te zoeken naar je portemonnee, maar hij is weg.\nNog voordat je iets kan zeggen zegt een mannenstem:\n‘Ik betaal het drankje voor beste {player.name} hier!\nHet is de manager. Hij heeft hulp nodig voor klusjes in en rondom het restaurant. Het restaurant heeft namelijk door de coronacrisis een tekort aan personeel met slechtere opbrengsten als gevolg. Het mag niet failliet gaan, want dit is jouw lievelings restaurant.\n\nJe moet de manager helpen!\n\nHet doel van het spel is om de 3 taken te vinden op verschillende locaties en deze uit te voeren. Heb je dat succesvol gedaan, heb je gewonnen! Succes :)\n"
+text = f"Je zit aan de bar met een drankje in een restaurant.\nHet is er druk.\nJe ziet mensen drinken, praten en het gezellig hebben. \nJe voelt je alleen. Je wil je drankje afrekenen en begint te zoeken naar je portemonnee, maar hij is weg.\nNog voordat je iets kan zeggen zegt een mannenstem:\n‘Ik betaal het drankje voor beste {player.name} hier!'\nHet is de manager. Hij heeft hulp nodig voor klusjes in en rondom het restaurant.\n Het restaurant heeft namelijk door de coronacrisis een tekort aan personeel met slechtere opbrengsten als gevolg. \nHet mag niet failliet gaan, want dit is jouw lievelings restaurant.\n\nJe moet de manager helpen!\n\nHet doel van het spel is om de 3 taken te vinden op verschillende locaties en deze uit te voeren. \nHeb je dat succesvol gedaan, heb je gewonnen! Succes :)\n"
 typewriter()
 print('=' * 45)
 print("Druk op enter om de manager te helpen met zijn taken")
@@ -114,7 +113,7 @@ while True:
         print('*'+ x)
     print('\nEr zijn 3 opdrachten in totaal. Hieronder staan de taken die je hebt gevonden:')
     if 'bestelling' in inventory:
-      print('* bestelling: Zoek naar een glas water en lever het bij het eetgedeelte.')
+      print('* bestelling: Zoek naar spa en lever het bij het eetgedeelte.')
     if 'parasol taak' in inventory:
       print('* parasol taak: Zoek naar de parasols en breng ze naar het buitenterras.')
     if 'champignon taak' in inventory:
@@ -183,10 +182,15 @@ while True:
     antwoord = input ('--> ')
     #if antwoord.lower()
     if antwoord.lower().strip() in locatie[player.location][item]:
-      inventory.append(antwoord.lower())
-      print(f'{antwoord} zit nu in je inventory!')
-      locatie[player.location][item].remove(antwoord.lower().strip())
-      game_loop()
+      if antwoord.lower().strip() == 'spa rood':
+        print('Doe normaal, niemand drinkt spa rood')
+        time.sleep(2)
+        game_over()
+      else:
+        inventory.append(antwoord.lower())
+        print(f'{antwoord} zit nu in je inventory!')
+        locatie[player.location][item].remove(antwoord.lower().strip())
+        game_loop()
     else:
       print('Dit is niet een geldig antwoord. Probeer opnieuw.')
       time.sleep(1)
@@ -251,7 +255,7 @@ while True:
 
   #GAMELOOP
   def game_loop():
-    if "glas water" in locatie['Eetgedeelte'][item] and 'champignons' in locatie['Keuken'][item] and 'parasols' in locatie['Buitenterras'][item]:
+    if "spa blauw" in locatie['Eetgedeelte'][item] and 'champignons' in locatie['Keuken'][item] and 'parasols' in locatie['Buitenterras'][item]:
       win()
     else:
       print_location()
