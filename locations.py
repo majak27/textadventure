@@ -19,7 +19,7 @@ W = 'w'
 locatie = {
   "Bar": {
     title : "Bar",
-    description : "Hier kan je een drankje doen, maar om de manager te helpen zal je toch echt eerst moeten gaan werken. (Tip: taken kun je oppakken en vervolgens in je inventory uitgebreid bekijken!)",
+    description : "Hier kan je een drankje doen, maar om de manager te helpen zal je toch echt eerst moeten gaan werken.\n(Tip: taken kun je oppakken en vervolgens in je inventory uitgebreid bekijken!)",
     descriptionItems : '1',
     descriptionItems2 : '1',
     opties : "N: Keuken\nO: Gang\nZ: Eetgedeelte\nW: Opslag",
@@ -66,7 +66,7 @@ locatie = {
     descriptionItems : '1',
     descriptionItems2 : '1',
     opties : "Z: Keuken",
-    item : ['spa blauw','spa rood','parasol taak'],
+    item : ['spa rood','spa blauw','parasol taak'],
     N: "Bijkeuken",
     O: "Bijkeuken",
     Z: "Keuken",

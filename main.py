@@ -48,7 +48,7 @@ def typewriter():
 
 #animatie opties
 print('=' * 45)
-print('Voor we beginnen; wil je: \n(s) snelle animaties,\n(l) langzame animaties\n(g) geen animaties')
+print('Voor we beginnen; wil je dat de tekst: \n(s) snel geprint wordt,\n(l) langzaam geprint wordt\n(g) meteen geprint wordt')
 print('=' * 45)
 effect = input('--> ')
 text = ''
@@ -81,7 +81,7 @@ os.system("clear")
 
 #SCHERM4
 print('=' * 45)
-text = f"Je zit aan de bar met een drankje in een restaurant.\nHet is er druk.\nJe ziet mensen drinken, praten en het gezellig hebben. \nJe voelt je alleen. Je wil je drankje afrekenen en begint te zoeken naar je portemonnee, maar hij is weg.\nNog voordat je iets kan zeggen zegt een mannenstem:\n‘Ik betaal het drankje voor beste {player.name} hier!'\nHet is de manager. Hij heeft hulp nodig voor klusjes in en rondom het restaurant.\n Het restaurant heeft namelijk door de coronacrisis een tekort aan personeel met slechtere opbrengsten als gevolg. \nHet mag niet failliet gaan, want dit is jouw lievelings restaurant.\n\nJe moet de manager helpen!\n\nHet doel van het spel is om de 3 taken te vinden op verschillende locaties en deze uit te voeren. \nHeb je dat succesvol gedaan, heb je gewonnen! Succes :)\n"
+text = f"Je zit aan de bar met een drankje in een restaurant.\nHet is er druk.\nJe ziet mensen drinken, praten en het gezellig hebben.\nJe voelt je alleen. Je wil je drankje afrekenen en begint te zoeken naar je portemonnee, maar hij is weg.\nNog voordat je iets kan zeggen zegt een mannenstem:\n‘Ik betaal het drankje voor beste {player.name} hier!'\nHet is de manager. Hij heeft hulp nodig voor klusjes in en rondom het restaurant.\nHet restaurant heeft namelijk door de coronacrisis een tekort aan personeel met slechtere opbrengsten als gevolg. \nHet mag niet failliet gaan, want dit is jouw lievelings restaurant.\n\nJe moet de manager helpen!\n\nHet doel van het spel is om de 3 taken te vinden op verschillende locaties en deze uit te voeren. \nHeb je dat succesvol gedaan, heb je gewonnen! Succes :)\n"
 typewriter()
 print('=' * 45)
 print("Druk op enter om de manager te helpen met zijn taken")
@@ -144,7 +144,7 @@ while True:
   def nog_nodig():
     os.system('clear')
     print('Je hebt het benodigde item nog niet, dus kan je deze ruimte niet binnen.')
-    print(f'Zoek naar {locatie[player.location][nodig]} en kom hier terug!')
+    print(f"Zoek naar '{locatie[player.location][nodig]}' en kom hier terug!")
     print("Druk op 'b' om terug naar de bar te gaan.")
     player.location = 'Bar'
     menu_opties()
@@ -159,11 +159,12 @@ while True:
       os.system('clear')
       print('=' * 45)
       print('Je bent hier: ' + player.location)
-      if locatie[player.location][descriptionItems] in inventory or locatie[player.location][descriptionItems] in itemDingetjes:
+      if locatie[player.location][descriptionItems2] in inventory or locatie[player.location][descriptionItems2] in itemDingetjes:
+        itemDingetjes.append(locatie[player.location][descriptionItems2])
+        print('\n'+locatie[player.location][description3])
+      elif locatie[player.location][descriptionItems] in inventory or locatie[player.location][descriptionItems] in itemDingetjes:
         itemDingetjes.append(locatie[player.location][descriptionItems])
         print('\n'+locatie[player.location][description2])
-      elif locatie[player.location][descriptionItems2] in inventory:
-        print('\n'+locatie[player.location][description3])
       else:
         print('\n'+locatie[player.location][description])
       if locatie[player.location][item] != 0:
@@ -189,6 +190,7 @@ while True:
       else:
         inventory.append(antwoord.lower())
         print(f'{antwoord} zit nu in je inventory!')
+        time.sleep(1.5)
         locatie[player.location][item].remove(antwoord.lower().strip())
         game_loop()
     else:
